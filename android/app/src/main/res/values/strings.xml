@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Local Business Suite AI</string>
+    <string name="package_name">com.localbiz.ai.suite</string>
+    <string name="default_web_url">https://localbusiness-ai.app</string>
+    <string name="asset_statements">[{\n  \"relation\": [\"delegate_permission/common.handle_all_urls\"],\n  \"target\": {\n    \"namespace\": \"web\",\n    \"site\": \"https://localbusiness-ai.app\"\n  }\n}]</string>
+    <integer name="google_play_services_version">12451000</integer>
+</resources>

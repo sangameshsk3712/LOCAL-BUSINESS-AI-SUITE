@@ -1,0 +1,6 @@
+{
+  "name": "Local Business AI Suite",
+  "description": "AI-powered growth platform for local businesses and franchise networks. Includes Geo-Grid SEO, WhatsApp automation, CRM, review response generation, and AI operations tooling.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

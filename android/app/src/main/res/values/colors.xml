@@ -1,0 +1,7 @@
+<resources>
+    <color name="primary_dark">#020617</color>
+    <color name="primary_accent">#06b6d4</color>
+    <color name="status_bar">#020617</color>
+    <color name="navigation_bar">#020617</color>
+    <color name="splash_bg">#020617</color>
+</resources>

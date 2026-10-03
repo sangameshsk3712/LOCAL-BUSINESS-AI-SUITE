@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.localbiz.ai.twa",
+      "sha256_cert_fingerprints": [
+        "14:6D:E9:7F:0F:52:EC:6B:85:4E:87:3E:7E:6E:9A:89:E3:6B:4F:2C:9E:0B:48:9A:3D:1A:56:8F:2D:3E:4A:5B"
+      ]
+    }
+  }
+]

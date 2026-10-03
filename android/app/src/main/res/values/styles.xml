@@ -1,0 +1,15 @@
+<resources>
+    <!-- Base application theme -->
+    <style name="Theme.LocalBusinessSuiteAI" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary_accent</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/primary_accent</item>
+        <item name="android:statusBarColor">@color/status_bar</item>
+        <item name="android:navigationBarColor">@color/navigation_bar</item>
+        <item name="android:windowBackground">@color/primary_dark</item>
+    </style>
+
+    <style name="Theme.LocalBusinessSuiteAI.Splash" parent="Theme.LocalBusinessSuiteAI">
+        <item name="android:windowBackground">@color/splash_bg</item>
+    </style>
+</resources>

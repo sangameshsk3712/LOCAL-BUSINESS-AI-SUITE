@@ -1,0 +1,33 @@
+{
+  "id": "/",
+  "name": "Local Business Suite - Enterprise AI Platform",
+  "short_name": "LocalBizAI",
+  "description": "Enterprise AI Suite for local businesses: Geo-Grid SEO audit, WhatsApp marketing, CRM, automated footfall surge, and multi-location growth.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#090d16",
+  "background_color": "#030712",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

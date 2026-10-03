@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5" />
+      <stop offset="50%" stop-color="#7c3aed" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#818cf8" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="128" fill="#090d16" />
+  <rect x="24" y="24" width="464" height="464" rx="104" stroke="url(#grad1)" stroke-width="8" stroke-opacity="0.4" fill="none" />
+  <circle cx="256" cy="256" r="160" fill="url(#grad1)" opacity="0.15" />
+  <!-- AI Growth Node Icon -->
+  <path d="M256 120 L360 180 V300 L256 360 L152 300 V180 Z" stroke="url(#grad1)" stroke-width="16" stroke-linejoin="round" fill="none" />
+  <path d="M256 120 V256 M360 300 L256 256 M152 300 L256 256" stroke="url(#grad2)" stroke-width="12" stroke-linecap="round" />
+  <circle cx="256" cy="256" r="28" fill="#38bdf8" />
+  <circle cx="256" cy="120" r="16" fill="#818cf8" />
+  <circle cx="360" cy="180" r="16" fill="#c084fc" />
+  <circle cx="360" cy="300" r="16" fill="#38bdf8" />
+  <circle cx="256" cy="360" r="16" fill="#34d399" />
+  <circle cx="152" cy="300" r="16" fill="#818cf8" />
+  <circle cx="152" cy="180" r="16" fill="#38bdf8" />
+  <!-- Sparkles -->
+  <path d="M380 100 L385 115 L400 120 L385 125 L380 140 L375 125 L360 120 L375 115 Z" fill="#38bdf8" />
+  <path d="M120 380 L124 392 L136 396 L124 400 L120 412 L116 400 L104 396 L116 392 Z" fill="#c084fc" />
+</svg>

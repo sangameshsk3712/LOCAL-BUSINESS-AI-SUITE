@@ -1,0 +1,105 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User account profile for authenticated store owners and operators",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique user ID matching Firebase Auth UID"
+        },
+        "email": {
+          "type": "string",
+          "description": "User email address"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Full name or business owner name"
+        },
+        "storeName": {
+          "type": "string",
+          "description": "Associated store or branch name"
+        },
+        "role": {
+          "type": "string",
+          "description": "User authorization role",
+          "enum": ["owner", "manager", "staff", "guest"]
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO 8601 creation timestamp"
+        },
+        "lastLoginAt": {
+          "type": "string",
+          "description": "ISO 8601 last active timestamp"
+        }
+      },
+      "required": ["id", "email", "displayName", "role", "createdAt"]
+    },
+    "UserGeneratedWork": {
+      "title": "UserGeneratedWork",
+      "description": "Saved AI generation history records created by the user across hubs",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique history record identifier"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Firebase Auth UID of the record owner"
+        },
+        "title": {
+          "type": "string",
+          "description": "Human-readable label or headline for the generation"
+        },
+        "moduleType": {
+          "type": "string",
+          "description": "Platform hub where the work was generated",
+          "enum": [
+            "omnistar_10x",
+            "superbrain",
+            "omni_gpt",
+            "growth",
+            "content",
+            "crm",
+            "voice_rep",
+            "geogrid",
+            "business",
+            "code_widget",
+            "deep_research",
+            "batch_engine"
+          ]
+        },
+        "promptOrInput": {
+          "type": "string",
+          "description": "The prompt or parameters submitted by the user"
+        },
+        "generatedOutput": {
+          "type": "string",
+          "description": "The resulting AI generated text, code, or report"
+        },
+        "favorite": {
+          "type": "boolean",
+          "description": "Whether user marked this work as starred"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO 8601 creation timestamp"
+        }
+      },
+      "required": ["id", "userId", "title", "moduleType", "generatedOutput", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile documents indexed by Firebase Auth UID"
+    },
+    "/users/{userId}/history/{historyId}": {
+      "schema": "UserGeneratedWork",
+      "description": "User generation history documents stored under their authenticated user path"
+    }
+  }
+}
