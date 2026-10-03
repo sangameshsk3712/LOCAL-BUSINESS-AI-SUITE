@@ -110,6 +110,7 @@ import QrFlyerMarketingGenerator from "./components/QrFlyerMarketingGenerator";
 import TechnicalAssessmentHub from "./components/TechnicalAssessmentHub";
 import GooglePlayPublisher from "./components/GooglePlayPublisher";
 import OmniStarStudio from "./components/OmniStarStudio";
+import StreamlitSuitePro from "./components/StreamlitSuitePro";
 import EvaluatorFeatureAuditHub from "./components/EvaluatorFeatureAuditHub";
 import ApkCodeInspector from "./components/ApkCodeInspector";
 import AuthModal from "./components/AuthModal";
@@ -121,6 +122,7 @@ import { OfflineIndicator } from "./components/OfflineIndicator";
 import { LanguageProvider, useLanguage, LanguageCode } from "./services/languageContext";
 
 export type MainNavTab =
+  | "streamlit_suite"
   | "pos_cashier"
   | "evaluator_audit"
   | "apk_inspector"
@@ -586,6 +588,7 @@ function MainAppContent() {
     {
       title: "⭐ Mega AI SuperBrains & Store",
       items: [
+        { id: "streamlit_suite" as MainNavTab, label: "Streamlit Suite Pro (v3.2)", tag: "FOUNDER ED.", icon: Rocket, isSuper: true, accentColor: "text-amber-400" },
         { id: "evaluator_audit" as MainNavTab, label: "⭐ Evaluator 10/10 Hub", tag: "42-PT AUDIT", icon: Award, isSuper: true, accentColor: "text-emerald-400" },
         { id: "apk_inspector" as MainNavTab, label: "APK Source Inspector", tag: "KOTLIN BRIDGE", icon: FileCode, isSuper: true, accentColor: "text-cyan-400" },
         { id: "omnistar_10x" as MainNavTab, label: "OmniStar 10X Super-AI", tag: "13/13 STARS", icon: Sparkles, isSuper: true, accentColor: "text-amber-400" },
@@ -1260,6 +1263,15 @@ function MainAppContent() {
             <AdBanner
               isProUser={isProUser}
               onUpgradeClick={() => setActiveNav("premium")}
+            />
+          )}
+
+          {/* VIEW: Streamlit Suite Pro (v3.2) - Founder Sangamesh Khatge Edition */}
+          {activeNav === "streamlit_suite" && (
+            <StreamlitSuitePro
+              isKeyReady={!!apiKeyStatus?.configured}
+              onOpenKeyGuide={() => setActiveNav("credentials")}
+              onSaveToWorkspace={handleSaveToWorkspace}
             />
           )}
 
