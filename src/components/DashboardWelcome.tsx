@@ -25,7 +25,10 @@ import {
   Brain,
   Terminal,
   Crosshair,
-  Award
+  Award,
+  Crown,
+  Rocket,
+  ExternalLink
 } from "lucide-react";
 import { MainNavTab } from "../App";
 
@@ -146,6 +149,51 @@ export default function DashboardWelcome({
               </>
             )}
           </button>
+        </div>
+      </div>
+
+      {/* 👑 GRAND HIGHLIGHTED FOUNDER TAB & RELEASE: Streamlit Suite Pro (v3.2) - Sangamesh Shivkumar Khatge */}
+      <div
+        onClick={() => onNavigateToTab("streamlit_suite")}
+        className="relative z-10 mt-4 p-5 sm:p-6 rounded-3xl bg-gradient-to-r from-amber-950/90 via-slate-900 to-indigo-950 border-2 border-amber-400 hover:border-amber-300 cursor-pointer shadow-2xl hover:shadow-amber-500/30 transition-all hover:scale-[1.01] group flex flex-col md:flex-row md:items-center justify-between gap-4 ring-4 ring-amber-400/20"
+      >
+        <div className="flex items-start sm:items-center gap-4">
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-amber-400 via-orange-500 to-amber-300 flex items-center justify-center text-slate-950 font-black shadow-lg shadow-amber-500/40 group-hover:scale-110 transition-transform shrink-0">
+            <Crown className="w-8 h-8 text-slate-950" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-[10px] font-black uppercase px-3 py-1 rounded-full bg-gradient-to-r from-amber-400 to-amber-300 text-slate-950 shadow-md font-mono flex items-center gap-1.5">
+                <Crown className="w-3.5 h-3.5 text-slate-950" />
+                <span>OFFICIAL HIGHLIGHTED FOUNDER TAB • v3.2 PRO</span>
+              </span>
+              <span className="text-[11px] font-mono text-amber-300 font-bold flex items-center gap-1">
+                <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
+                Architected & Engineered by Founder Sangamesh Shivkumar Khatge
+              </span>
+            </div>
+            <h3 className="text-lg sm:text-xl font-black text-white group-hover:text-amber-300 transition-colors mt-1 flex items-center gap-2">
+              <span>Streamlit Suite Pro (v3.2) — Official Multi-Location & WhatsApp Growth Engine</span>
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mt-0.5">
+              Click to open the upgraded flagship Founder portal featuring 8 native modules: Franchise Command, WhatsApp Business Formatter with 1-click web dispatch, AI Review Responder, Local SEO Bundle, Flyer Designer, and Indian Regional Vernacular Localization.
+            </p>
+            <div className="flex items-center gap-3 pt-2 text-xs text-slate-400 flex-wrap">
+              <span className="text-amber-400 font-mono font-bold">✨ Direct Streamlit Integration</span>
+              <span>•</span>
+              <span className="text-cyan-400 font-mono">local-business-suite-fjknqjvlbpambaahokznhb.streamlit.app</span>
+              <span>•</span>
+              <span className="text-slate-300 font-mono">github.com/sangameshsk3712/local-business-suite</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col sm:flex-row items-center gap-2.5 shrink-0 self-end md:self-center">
+          <span className="px-5 py-3 rounded-2xl bg-gradient-to-r from-amber-400 via-amber-300 to-orange-400 text-slate-950 font-black text-xs sm:text-sm flex items-center gap-2 shadow-xl shadow-amber-500/30 group-hover:scale-105 transition-all">
+            <Rocket className="w-4 h-4 text-slate-950" />
+            <span>Open Founder Suite</span>
+            <ArrowRight className="w-4 h-4 text-slate-950" />
+          </span>
         </div>
       </div>
 

@@ -23,13 +23,15 @@ import {
   Globe,
   Sliders,
   Layers,
-  ArrowRight
+  ArrowRight,
+  X
 } from "lucide-react";
 
 interface StreamlitSuiteProProps {
   isKeyReady: boolean;
   onOpenKeyGuide?: () => void;
   onSaveToWorkspace?: (title: string, type: any, data: any) => void;
+  onClose?: () => void;
 }
 
 type StreamlitTab =
@@ -54,6 +56,7 @@ export default function StreamlitSuitePro({
   isKeyReady,
   onOpenKeyGuide,
   onSaveToWorkspace,
+  onClose,
 }: StreamlitSuiteProProps) {
   const [activeTab, setActiveTab] = useState<StreamlitTab>("whatsapp");
   const [copiedId, setCopiedId] = useState<string | null>(null);
@@ -330,7 +333,7 @@ Provide:
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <a
               href="https://local-business-suite-fjknqjvlbpambaahokznhb.streamlit.app/"
               target="_blank"
@@ -341,6 +344,17 @@ Provide:
               <span>Launch Live Streamlit Web App</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
+
+            {onClose && (
+              <button
+                onClick={onClose}
+                className="px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-rose-600/90 text-slate-200 hover:text-white border border-slate-700 hover:border-rose-500 font-bold text-xs flex items-center gap-1.5 shadow transition active:scale-95 whitespace-nowrap"
+                title="Close and return to Main Dashboard"
+              >
+                <X className="w-4 h-4 text-rose-400" />
+                <span>✕ Return to Dashboard</span>
+              </button>
+            )}
           </div>
         </div>
       </div>

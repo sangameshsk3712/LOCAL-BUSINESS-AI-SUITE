@@ -21,7 +21,8 @@ import {
   Crown,
   ShieldCheck,
   Scale,
-  DollarSign
+  DollarSign,
+  X
 } from "lucide-react";
 import { LocationBranch } from "../types";
 
@@ -39,6 +40,7 @@ interface OmniBizGptProps {
   onOpenKeyGuide: () => void;
   activeLocation?: LocationBranch;
   onSaveToWorkspace?: (title: string, type: any, data: any) => void;
+  onClose?: () => void;
 }
 
 type GptMode = "general" | "scale_100cr" | "viral_cmo" | "sales_closer" | "legal_franchise";
@@ -48,6 +50,7 @@ export default function OmniBizGpt({
   onOpenKeyGuide,
   activeLocation,
   onSaveToWorkspace,
+  onClose,
 }: OmniBizGptProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -361,6 +364,17 @@ Whether you want to build a **₹100 Crore enterprise empire**, launch viral cus
           >
             <Trash2 className="w-4 h-4" />
           </button>
+
+          {onClose && (
+            <button
+              onClick={onClose}
+              className="px-3 py-1.5 rounded-xl bg-rose-500/20 hover:bg-rose-600 text-rose-300 hover:text-white border border-rose-500/40 text-xs font-black flex items-center gap-1.5 transition-all shadow-sm group shrink-0 active:scale-95"
+              title="Close OmniBiz GPT & Return to Main Dashboard"
+            >
+              <X className="w-4 h-4 text-rose-400 group-hover:text-white" />
+              <span>✕ Return to Dashboard</span>
+            </button>
+          )}
         </div>
       </div>
 

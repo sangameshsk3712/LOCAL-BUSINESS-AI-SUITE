@@ -1247,32 +1247,67 @@ function MainAppContent() {
         {/* Main Content Workspace */}
         <main className="flex-1 min-w-0 p-4 sm:p-6 lg:p-7 space-y-6 overflow-x-hidden">
           {/* 1. Welcome to Local Business Suite, Uses of This App, and Quick Access Cards */}
-          <DashboardWelcome
-            onNavigateToTab={(tab) => {
-              setActiveNav(tab);
-              setIsMobileMenuOpen(false);
-            }}
-            activeNav={activeNav}
-            isKeyReady={!!apiKeyStatus?.configured}
-            activeLocationName={activeLocation.name}
-            onOpenKeyGuide={() => setActiveNav("credentials")}
-          />
+          {activeNav !== "omni_gpt" && activeNav !== "streamlit_suite" && (
+            <>
+              <DashboardWelcome
+                onNavigateToTab={(tab) => {
+                  setActiveNav(tab);
+                  setIsMobileMenuOpen(false);
+                }}
+                activeNav={activeNav}
+                isKeyReady={!!apiKeyStatus?.configured}
+                activeLocationName={activeLocation.name}
+                onOpenKeyGuide={() => setActiveNav("credentials")}
+              />
 
-          {/* Online Monetization Sponsor Ad (Free for Pro Users) */}
-          {activeNav !== "premium" && (
-            <AdBanner
-              isProUser={isProUser}
-              onUpgradeClick={() => setActiveNav("premium")}
-            />
+              {/* Online Monetization Sponsor Ad (Free for Pro Users) */}
+              {activeNav !== "premium" && (
+                <AdBanner
+                  isProUser={isProUser}
+                  onUpgradeClick={() => setActiveNav("premium")}
+                />
+              )}
+            </>
           )}
 
-          {/* VIEW: Streamlit Suite Pro (v3.2) - Founder Sangamesh Khatge Edition */}
+          {/* VIEW: Streamlit Suite Pro (v3.2) - Founder Sangamesh Khatge Edition (FRONT VIEW) */}
           {activeNav === "streamlit_suite" && (
-            <StreamlitSuitePro
-              isKeyReady={!!apiKeyStatus?.configured}
-              onOpenKeyGuide={() => setActiveNav("credentials")}
-              onSaveToWorkspace={handleSaveToWorkspace}
-            />
+            <div className="space-y-4">
+              <div className="flex items-center justify-between p-3 sm:p-4 rounded-2xl bg-gradient-to-r from-amber-950/90 via-slate-900 to-indigo-950 border-2 border-amber-400/50 shadow-2xl">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-300">
+                    <Crown className="w-5 h-5 text-amber-400" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <h2 className="text-sm sm:text-base font-black text-white">Streamlit Suite Pro (v3.2) • Founder Edition</h2>
+                      <span className="text-[10px] font-mono font-black uppercase px-2 py-0.5 rounded-full bg-amber-500/30 text-amber-300 border border-amber-400/30">
+                        ⭐ FRONT SCREEN
+                      </span>
+                    </div>
+                    <p className="text-xs text-slate-300">
+                      Architected by Founder Sangamesh Shivkumar Khatge. Full screen focused workspace.
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => setActiveNav("growth")}
+                  className="px-4 py-2 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white font-black text-xs flex items-center gap-2 shadow-lg shadow-rose-600/30 transition-all hover:scale-105 active:scale-95 shrink-0"
+                  title="Close & Return to Main Dashboard"
+                >
+                  <X className="w-4 h-4" />
+                  <span>✕ Return to Main Dashboard</span>
+                </button>
+              </div>
+
+              <StreamlitSuitePro
+                isKeyReady={!!apiKeyStatus?.configured}
+                onOpenKeyGuide={() => setActiveNav("credentials")}
+                onSaveToWorkspace={handleSaveToWorkspace}
+                onClose={() => setActiveNav("growth")}
+              />
+            </div>
           )}
 
           {/* VIEW: Offline Retail POS Cashier & Receipt Terminal */}
@@ -1327,14 +1362,45 @@ function MainAppContent() {
           />
         )}
 
-        {/* 0. VIEW: OmniBiz GPT - Enterprise Business ChatGPT */}
+        {/* 0. VIEW: OmniBiz GPT - Enterprise Business ChatGPT (FRONT FULLSCREEN VIEW) */}
         {activeNav === "omni_gpt" && (
-          <OmniBizGpt
-            isKeyReady={!!apiKeyStatus?.configured}
-            onOpenKeyGuide={() => setActiveNav("credentials")}
-            activeLocation={activeLocation}
-            onSaveToWorkspace={handleSaveToWorkspace}
-          />
+          <div className="space-y-4">
+            <div className="flex items-center justify-between p-3 sm:p-4 rounded-2xl bg-gradient-to-r from-purple-950 via-slate-900 to-indigo-950 border-2 border-purple-500/50 shadow-2xl">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center text-purple-300">
+                  <Bot className="w-5 h-5 text-purple-400" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h2 className="text-sm sm:text-base font-black text-white">OmniBiz GPT 5.0 Enterprise</h2>
+                    <span className="text-[10px] font-mono font-black uppercase px-2 py-0.5 rounded-full bg-purple-500/30 text-purple-300 border border-purple-400/30">
+                      ⭐ FRONT SCREEN FOCUS
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-300">
+                    Full-screen enterprise ChatGPT view. Dashboard banner is hidden. Click ✕ to return anytime.
+                  </p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => setActiveNav("growth")}
+                className="px-4 py-2 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white font-black text-xs flex items-center gap-2 shadow-lg shadow-rose-600/30 transition-all hover:scale-105 active:scale-95 shrink-0"
+                title="Close OmniBiz GPT & Return to Main Dashboard"
+              >
+                <X className="w-4 h-4" />
+                <span>✕ Return to Main Dashboard</span>
+              </button>
+            </div>
+
+            <OmniBizGpt
+              isKeyReady={!!apiKeyStatus?.configured}
+              onOpenKeyGuide={() => setActiveNav("credentials")}
+              activeLocation={activeLocation}
+              onSaveToWorkspace={handleSaveToWorkspace}
+              onClose={() => setActiveNav("growth")}
+            />
+          </div>
         )}
 
         {/* 1. VIEW: AI Business Growth Agent */}
