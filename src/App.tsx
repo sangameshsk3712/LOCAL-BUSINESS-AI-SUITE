@@ -103,6 +103,7 @@ import TargetedAdsStudio from "./components/TargetedAdsStudio";
 import InAppReferralEngine from "./components/InAppReferralEngine";
 import AgencyWhiteLabelPortal from "./components/AgencyWhiteLabelPortal";
 import PosIntegrationsHub from "./components/PosIntegrationsHub";
+import OfflinePosCashier from "./components/OfflinePosCashier";
 import RegionalFranchiseExpansion from "./components/RegionalFranchiseExpansion";
 import DeveloperWebhooksHub from "./components/DeveloperWebhooksHub";
 import QrFlyerMarketingGenerator from "./components/QrFlyerMarketingGenerator";
@@ -117,8 +118,10 @@ import { auth, testFirestoreConnection, saveUserGeneratedWork, loadUserHistory }
 import { onAuthStateChanged, signOut, User as FirebaseUser } from "firebase/auth";
 import { PWAInstallButton } from "./components/PWAInstallButton";
 import { OfflineIndicator } from "./components/OfflineIndicator";
+import { LanguageProvider, useLanguage, LanguageCode } from "./services/languageContext";
 
 export type MainNavTab =
+  | "pos_cashier"
   | "evaluator_audit"
   | "apk_inspector"
   | "user_history"
@@ -163,7 +166,8 @@ export type MainNavTab =
   | "developer_webhooks"
   | "qr_flyer";
 
-export default function App() {
+function MainAppContent() {
+  const { currentLanguage, setLanguage, languages } = useLanguage();
   // Navigation active tab - defaults to "growth" for the AI Business Growth platform
   const [activeNav, setActiveNav] = useState<MainNavTab>("growth");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -574,6 +578,7 @@ export default function App() {
     {
       title: "🏢 Operations & Expansion",
       items: [
+        { id: "pos_cashier" as MainNavTab, label: "Offline POS Cashier", tag: "BILLING & SYNC", icon: Receipt, accentColor: "text-cyan-400" },
         { id: "whatsapp_onboarding" as MainNavTab, label: "WhatsApp Onboarding", tag: "2-Min Meta", icon: MessageCircle, accentColor: "text-emerald-400" },
         { id: "qr_flyer" as MainNavTab, label: "QR Review Flyer Studio", tag: "Table Tents", icon: QrCode, accentColor: "text-amber-400" },
         { id: "pos_integrations" as MainNavTab, label: "POS Integrations Hub", tag: "Petpooja/Vyapar", icon: Receipt, accentColor: "text-emerald-400" },
@@ -1025,6 +1030,22 @@ export default function App() {
               </span>
             </div>
 
+            {/* Regional Vernacular Language Selector */}
+            <div className="relative flex items-center">
+              <select
+                value={currentLanguage}
+                onChange={(e) => setLanguage(e.target.value as LanguageCode)}
+                className="bg-slate-900 border border-slate-700/80 rounded-xl px-2 py-1.5 text-xs font-bold text-slate-200 focus:outline-none focus:border-cyan-400 cursor-pointer shadow-sm hover:border-slate-600 transition"
+                title="Select Regional Vernacular Language"
+              >
+                {languages.map((l) => (
+                  <option key={l.code} value={l.code} className="bg-slate-900 text-white">
+                    {l.flag} {l.label} ({l.nativeName.split(" ")[0]})
+                  </option>
+                ))}
+              </select>
+            </div>
+
             {/* User History Quick Access Button */}
             <button
               onClick={() => setActiveNav("user_history")}
@@ -1215,6 +1236,9 @@ export default function App() {
               onUpgradeClick={() => setActiveNav("premium")}
             />
           )}
+
+          {/* VIEW: Offline Retail POS Cashier & Receipt Terminal */}
+          {activeNav === "pos_cashier" && <OfflinePosCashier />}
 
           {/* VIEW: Official Evaluator 10/10 Star Feature Audit Console */}
           {activeNav === "evaluator_audit" && (
@@ -1715,5 +1739,13 @@ export default function App() {
         </div>
       </footer>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <LanguageProvider>
+      <MainAppContent />
+    </LanguageProvider>
   );
 }
