@@ -9,6 +9,8 @@ import {
   onAuthStateChanged,
   User as FirebaseUser,
   updateProfile,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 import {
   getFirestore,
@@ -186,4 +188,41 @@ export async function deleteUserWork(userId: string, workId: string): Promise<vo
   } catch (err) {
     console.warn("Could not delete from Firestore:", err);
   }
+}
+
+// Google Sign-In with Popup (Standard Provisioned Firebase Provider)
+export async function signInWithGoogle() {
+  const provider = new GoogleAuthProvider();
+  const userCredential = await signInWithPopup(auth, provider);
+  await saveUserProfile(userCredential.user);
+  return userCredential.user;
+}
+
+export interface LocalMerchantSession {
+  uid: string;
+  email: string;
+  displayName: string;
+  isAnonymous: boolean;
+}
+
+export function saveLocalMerchantSession(session: LocalMerchantSession) {
+  try {
+    localStorage.setItem("lbs_local_merchant_session", JSON.stringify(session));
+    window.dispatchEvent(new Event("lbs_auth_state_changed"));
+  } catch {}
+}
+
+export function getLocalMerchantSession(): LocalMerchantSession | null {
+  try {
+    const saved = localStorage.getItem("lbs_local_merchant_session");
+    if (saved) return JSON.parse(saved);
+  } catch {}
+  return null;
+}
+
+export function clearLocalMerchantSession() {
+  try {
+    localStorage.removeItem("lbs_local_merchant_session");
+    window.dispatchEvent(new Event("lbs_auth_state_changed"));
+  } catch {}
 }

@@ -114,7 +114,7 @@ import EvaluatorFeatureAuditHub from "./components/EvaluatorFeatureAuditHub";
 import ApkCodeInspector from "./components/ApkCodeInspector";
 import AuthModal from "./components/AuthModal";
 import UserHistoryHub from "./components/UserHistoryHub";
-import { auth, testFirestoreConnection, saveUserGeneratedWork, loadUserHistory } from "./services/firebase";
+import { auth, testFirestoreConnection, saveUserGeneratedWork, loadUserHistory, getLocalMerchantSession, clearLocalMerchantSession } from "./services/firebase";
 import { onAuthStateChanged, signOut, User as FirebaseUser } from "firebase/auth";
 import { PWAInstallButton } from "./components/PWAInstallButton";
 import { OfflineIndicator } from "./components/OfflineIndicator";
@@ -303,21 +303,43 @@ function MainAppContent() {
 
   useEffect(() => {
     testFirestoreConnection();
+
+    const syncSession = () => {
+      if (!auth.currentUser) {
+        const local = getLocalMerchantSession();
+        if (local) {
+          setCurrentUser(local as any);
+          return;
+        }
+      }
+    };
+    syncSession();
+    window.addEventListener("lbs_auth_state_changed", syncSession);
+
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      setCurrentUser(user);
       if (user) {
+        setCurrentUser(user);
         const history = await loadUserHistory(user.uid);
         setUserHistoryCount(history.length);
       } else {
-        try {
-          const guestHistory = JSON.parse(localStorage.getItem("lbs_guest_history") || "[]");
-          setUserHistoryCount(guestHistory.length);
-        } catch {
-          setUserHistoryCount(0);
+        const local = getLocalMerchantSession();
+        if (local) {
+          setCurrentUser(local as any);
+        } else {
+          setCurrentUser(null);
+          try {
+            const guestHistory = JSON.parse(localStorage.getItem("lbs_guest_history") || "[]");
+            setUserHistoryCount(guestHistory.length);
+          } catch {
+            setUserHistoryCount(0);
+          }
         }
       }
     });
-    return () => unsubscribe();
+    return () => {
+      unsubscribe();
+      window.removeEventListener("lbs_auth_state_changed", syncSession);
+    };
   }, []);
 
   const handleSaveToWorkspace = async (title: string, type: any, data: any) => {
@@ -1076,7 +1098,11 @@ function MainAppContent() {
                   <div className="text-[9px] text-emerald-400 font-mono">Cloud Synced</div>
                 </div>
                 <button
-                  onClick={() => signOut(auth)}
+                  onClick={() => {
+                    signOut(auth);
+                    clearLocalMerchantSession();
+                    setCurrentUser(null);
+                  }}
                   className="text-[10px] text-slate-400 hover:text-rose-400 font-bold ml-1 transition"
                   title="Sign Out"
                 >
